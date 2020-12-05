@@ -12,6 +12,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(routes);
 
 // turn on connection to db and server
+//fource: true is like adding a drop table line  in schemas
+//normaly keep force: false to preserve data
 sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () => console.log('Now listening'));
 });
