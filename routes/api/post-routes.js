@@ -146,12 +146,17 @@ router.put('/upvote', (req, res) => {
   });
 
   //DISTROY / delete post
-  router.delete('/:id', (req, res) => {
-    Post.destroy({
+  router.delete('/:id', (req, res) => {//this is 100% the route
+    Comment.destroy({
       where: {
-        id: req.params.id
+        post_id: req.params.id
       }
     })
+    Post.destroy({//this is just what goes on once route is 100% called
+      where: {
+        id: req.params.id
+       }
+     })
       .then(dbPostData => {
         if (!dbPostData) {
           res.status(404).json({ message: 'No post found with this id' });
